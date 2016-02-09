@@ -46,6 +46,7 @@ if [ -f /etc/csf/csf.allow ]; then
 echo "udp|out|d=1514|d=${OBSERVIUM}" >> /etc/csf/csf.allow
 echo "udp|in|d=161|s=${OBSERVIUM}"   >> /etc/csf/csf.allow
 echo "tcp|in|d=36602|s=${OBSERVIUM}" >> /etc/csf/csf.allow
+csf -a ${OBSERVIUM}
 csf -r
 fi
 
