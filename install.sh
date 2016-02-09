@@ -9,10 +9,10 @@ wget -qO /usr/bin/distro ${OBSERVIUM_BASE}/distro
 
 mkdir -p /usr/lib/observium_agent/local
 
-wget -qO /usr/lib/observium_agent/local/ ${OBSERVIUM_BASE}/nginx
-wget -qO /usr/lib/observium_agent/local/ ${OBSERVIUM_BASE}/rpm
-wget -qO /usr/lib/observium_agent/local/ ${OBSERVIUM_BASE}/mysql
-wget -qO /usr/lib/observium_agent/local/ ${OBSERVIUM_BASE}/mysql.cnf
+wget -qO /usr/lib/observium_agent/local/nginx      ${OBSERVIUM_BASE}/nginx
+wget -qO /usr/lib/observium_agent/local/rpm        ${OBSERVIUM_BASE}/rpm
+wget -qO /usr/lib/observium_agent/local/mysql      ${OBSERVIUM_BASE}/mysql
+wget -qO /usr/lib/observium_agent/local/mysql.cnf  ${OBSERVIUM_BASE}/mysql.cnf
 
 chmod +x /usr/bin/observium_agent /etc/xinetd.d/observium_agent /usr/bin/distro /usr/lib/observium_agent/local/*
 
