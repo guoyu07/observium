@@ -18,10 +18,11 @@ wget -qO /usr/lib/observium_agent/local/mysql.cnf  ${OBSERVIUM_BASE}/mysql.cnf
 chmod +x /usr/bin/observium_agent /etc/xinetd.d/observium_agent /usr/bin/distro /usr/lib/observium_agent/local/*
 
 ## configure snmpd user and auth
+echo
 read -e -p "---> Enter your observium server IP address: " -i "1.2.3.4" OBSERVIUM
 sed -i "s/OBSERVIUM_IP/${OBSERVIUM}/" /etc/xinetd.d/observium_agent
 
-service snmpd stop
+service snmpd stop >/dev/null 2>&1
 echo
 read -e -p "---> Enter SNMPD service username: " -i "USERNAME" SNMPD_USERNAME
 read -e -p "---> Enter SNMPD service location: " -i "Paris, France" SNMPD_LOCATION
@@ -41,15 +42,16 @@ net-snmp-create-v3-user -ro -A ${MD5_CODE} -X ${AES_CODE} -a MD5 -x AES ${SNMPD_
 echo
 echo "MD5_CODE ${MD5_CODE}"
 echo "AES_CODE ${AES_CODE}"
-
+echo
 if [ -f /etc/csf/csf.allow ]; then
 echo "udp|out|d=1514|d=${OBSERVIUM}" >> /etc/csf/csf.allow
 echo "udp|in|d=161|s=${OBSERVIUM}"   >> /etc/csf/csf.allow
 echo "tcp|in|d=36602|s=${OBSERVIUM}" >> /etc/csf/csf.allow
 csf -a ${OBSERVIUM}
-csf -r
+csf -x  >/dev/null 2>&1
+csf -e  >/dev/null 2>&1
 fi
 
-service snmpd restart
-service xinetd restart
+service snmpd restart >/dev/null 2>&1
+service xinetd restart >/dev/null 2>&1
 
