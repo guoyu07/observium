@@ -23,9 +23,9 @@ sed -i "s/OBSERVIUM_IP/${OBSERVIUM}/" /etc/xinetd.d/observium_agent
 service snmpd stop
 echo
 read -e -p "---> Enter SNMPD service username: " -i "USERNAME" SNMPD_USERNAME
-read -e -p "---> Enter SNMPD service username: " -i "LOCATION" SNMPD_LOCATION
-read -e -p "---> Enter SNMPD service username: " -i "NAME" SNMPD_NAME
-read -e -p "---> Enter SNMPD service username: " -i "EMAIL" SNMPD_EMAIL
+read -e -p "---> Enter SNMPD service location: " -i "LOCATION" SNMPD_LOCATION
+read -e -p "---> Enter SNMPD service contact name: " -i "CONTACT NAME" SNMPD_NAME
+read -e -p "---> Enter SNMPD service contact email: " -i "CONTACT EMAIL" SNMPD_EMAIL
 
 MD5_CODE=$(head -c 500 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
 AES_CODE=$(head -c 500 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
