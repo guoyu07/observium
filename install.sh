@@ -1,5 +1,5 @@
 #!/bin/bash
-yum install net-snmp xinetd 
+rpm -qa | grep -qw xinetd || yum -y install net-snmp xinetd 
 ## pre-install observium agent and scripts
 OBSERVIUM_BASE="https://raw.githubusercontent.com/magenx/observium/master"
 
