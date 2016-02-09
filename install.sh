@@ -1,5 +1,6 @@
 #!/bin/bash
-rpm -qa | grep -qw xinetd || yum -y install net-snmp xinetd 
+rpm -qa | grep -qw xinetd || yum -y install net-snmp xinetd
+
 ## pre-install observium agent and scripts
 OBSERVIUM_BASE="https://raw.githubusercontent.com/magenx/observium/master"
 
@@ -40,6 +41,13 @@ net-snmp-create-v3-user -ro -A ${MD5_CODE} -X ${AES_CODE} -a MD5 -x AES ${SNMPD_
 echo
 echo "MD5_CODE ${MD5_CODE}"
 echo "AES_CODE ${AES_CODE}"
+
+if [ -f /etc/csf/csf.allow ]; then
+echo "udp|out|d=1514|d=${OBSERVIUM}" >> /etc/csf/csf.allow
+echo "udp|in|d=161|s=${OBSERVIUM}"   >> /etc/csf/csf.allow
+echo "tcp|in|d=36602|s=${OBSERVIUM}" >> /etc/csf/csf.allow
+csf -r
+fi
 
 service snmpd restart
 service xinetd restart
